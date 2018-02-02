@@ -12,6 +12,9 @@ Plugin 'VundleVim/Vundle.vim'
 set runtimepath^=~/.vim/bundle
 Plugin 'ctrlp.vim'
 Plugin 'https://github.com/scrooloose/nerdtree'
+Plugin 'https://github.com/fatih/vim-go'
+Plugin 'https://github.com/terryma/vim-multiple-cursors'
+Plugin 'scrooloose/nerdcommenter'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'w0rp/ale'
@@ -192,11 +195,16 @@ map <C-b> :NERDTreeToggle<CR>
 " set list listchars=trail:·,eol:⎈,tab:→→
 set list listchars=trail:·,tab:→→
 
-" Relative numbers with absolute for current line
-set number relativenumber
 
 " defualt created gists to private
 let g:gist_post_private = 1
 
 set mouse=a
+" Highlight search reseults
+set hlsearch
 
+" Enable the list of buffers
+let g:airline#extensions#tabline#enabled = 1
+
+" Show just the filename
+let g:airline#extensions#tabline#fnamemod = ':t'
