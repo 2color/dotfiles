@@ -10,18 +10,28 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 set runtimepath^=~/.vim/bundle
-Plugin 'ctrlp.vim'
+" Plugin 'ctrlp.vim'
+Plugin 'junegunn/fzf.vim'
 Plugin 'https://github.com/scrooloose/nerdtree'
 Plugin 'https://github.com/fatih/vim-go'
 Plugin 'https://github.com/terryma/vim-multiple-cursors'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'w0rp/ale'
+"Plugin 'w0rp/ale'
 Plugin 'crusoexia/vim-monokai'
 Plugin 'mileszs/ack.vim'
 Plugin 'Gist.vim'
 Plugin 'mattn/webapi-vim'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-fugitive'
+Plugin 'ntpeters/vim-better-whitespace'
+"Plugin 'SirVer/ultisnips'
+"Plugin 'honza/vim-snippets'
+
+
+
+
 
 call vundle#end()
 " vundle END
@@ -193,7 +203,7 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 map <C-b> :NERDTreeToggle<CR>
 
 " set list listchars=trail:·,eol:⎈,tab:→→
-set list listchars=trail:·,tab:→→
+" set list listchars=trail:·,tab:→→
 
 
 " defualt created gists to private
@@ -208,3 +218,23 @@ let g:airline#extensions#tabline#enabled = 1
 
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
+
+" If installed using Homebrew
+set rtp+=/usr/local/opt/fzf
+
+map <C-P> :FZF ~/workspace<CR>
+map <C-p> :FZF <CR>
+
+" Linting  with prettier_standard
+let g:ale_fixers = {'javascript': ['prettier_standard']}
+let g:ale_linters = {'javascript': ['']}
+
+" Whitespace stripping
+let g:better_whitespace_enabled=1
+let g:strip_whitespace_on_save=1
+
+" Search is case sensitive if it includes uppercase
+set ignorecase
+
+let g:go_auto_type_info = 1
+
