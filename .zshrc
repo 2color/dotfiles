@@ -88,9 +88,8 @@ nvm use --silent default
 
 # Disable git autocorrect
 alias k=kubectl
-alias f=fleetctl
-alias datedir='mkdir "$(date +"%d-%m-%Y")"'
-source /Users/danielnorman/workspace/bashit/ci-env
+alias vim=nvim
+alias datedir='mkdir "$(date +"%d-%m-%Y")" && date +"%d-%m-%Y"'
 
 export GOPATH=/Users/danielnorman/workspace/go
 export WORK=$GOPATH/src/github.com
@@ -106,6 +105,11 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
+# fzf via Homebrew
+if [ -e /usr/local/opt/fzf/shell/completion.zsh ]; then
+  source /usr/local/opt/fzf/shell/key-bindings.zsh
+  source /usr/local/opt/fzf/shell/completion.zsh
+fi
 
 # In order for gpg to find gpg-agent, gpg-agent must be running, and there must be an env
 # variable pointing GPG to the gpg-agent socket. This little script, which must be sourced
@@ -120,10 +124,21 @@ else
     eval $(gpg-agent --daemon --write-env-file ~/.gnupg/.gpg-agent-info)
 fi
 
+export LANGUAGE=EN
+
+PATH="/Users/danielnorman/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/Users/danielnorman/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/Users/danielnorman/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/Users/danielnorman/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/Users/danielnorman/perl5"; export PERL_MM_OPT;
 
 # kubectl autocompletion
-source <(kubectl completion zsh)
 source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc'
 source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc'
+source <(kubectl completion zsh)
 
-export LANGUAGE=EN
+
+# Keyboard repeat rate MacOS
+defaults write NSGlobalDomain KeyRepeat -int 1
+defaults write NSGlobalDomain InitialKeyRepeat -int 10
+
