@@ -1,6 +1,6 @@
 #!/bin/bash
+
 ############################
-# .make.sh
 # This script creates symlinks from the home directory to any desired dotfiles in ~/dotfiles
 ############################
 
@@ -24,10 +24,12 @@ echo "done"
 
 # move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks from the homedir to any files in the ~/dotfiles directory specified in $files
 for file in $files; do
-    echo "Moving any existing dotfiles from ~ to $olddir"
-    mv "~/${file}" "~/dotfiles_old/"
+    if [ -f "~/${file}" ]; then
+        echo "Moving ~/${file} to ${olddir}"
+        mv "~/${file}" "~/dotfiles_old/"
+    fi
     echo "Creating symlink to $file in home directory."
-    ln -s "${dir}/${file}" "~/${file}"
+    ln -fs "${dir}/${file}" ~/${file}
 done
 
 install_zsh () {
